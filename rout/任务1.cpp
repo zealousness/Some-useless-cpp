@@ -5,12 +5,12 @@
 using namespace std;
 const int N = 1000;
 const int maxn = 16;
-int dis[N][N]; //¸÷±ß¾àÀë
-int next[N][N];//ÏàÁÚµã 
-int jump[N][N];//ÏÂÒ»Ìø 
-int las[N];    //ÏàÁÚµã¼ÆÊıÆ÷
-int nw[N][N];  //ÁÙÊ±Â·ÓÉ±í
-int cl[N][N];  //¸÷±ßÈ¨Öµ
+int dis[N][N]; //å„è¾¹è·ç¦»
+int next[N][N];//ç›¸é‚»ç‚¹ 
+int jump[N][N];//ä¸‹ä¸€è·³ 
+int las[N];    //ç›¸é‚»ç‚¹è®¡æ•°å™¨
+int nw[N][N];  //ä¸´æ—¶è·¯ç”±è¡¨
+int cl[N][N];  //å„è¾¹æƒå€¼
 
 bool convergence = 0;
 
@@ -26,11 +26,11 @@ void add(int a,int b,int c)
 
 int main()
 {
- int n,m,c;                    //nÎª½ÚµãÊı£¬mÎª±ßÊı£¬(a,b,c)ÎªÒ»Ìõ±ßµÄÁ½¸ö½ÚµãÓë³¤¶È 
+ int n,m,c;                    //nä¸ºèŠ‚ç‚¹æ•°ï¼Œmä¸ºè¾¹æ•°ï¼Œ(a,b,c)ä¸ºä¸€æ¡è¾¹çš„ä¸¤ä¸ªèŠ‚ç‚¹ä¸é•¿åº¦ 
  
  char a,b;
  
- memset(next,0,sizeof(next));  //³õÊ¼»¯ 
+ memset(next,0,sizeof(next));  //åˆå§‹åŒ– 
  memset(las,0,sizeof(las));
  memset(jump,0,sizeof(jump));
  
@@ -41,29 +41,29 @@ int main()
  for(int i=0;i<n;i++)
  for(int j=0;j<n;j++)
  {if(i!=j)
- dis[i][j]=maxn;               //Éè×î´ó¾àÀëÎª15 
+ dis[i][j]=maxn;               //è®¾æœ€å¤§è·ç¦»ä¸º15 
  else
  dis[i][j]=0;
- jump[i][j]=j;               //³õÊ¼»¯ÏÂÒ»Ìø 
+ jump[i][j]=j;               //åˆå§‹åŒ–ä¸‹ä¸€è·³ 
  }
  
- for(int i=1;i<=m;i++)       //¶ÁÈëÊı¾İ£¬½¨Í¼ 
+ for(int i=1;i<=m;i++)       //è¯»å…¥æ•°æ®ï¼Œå»ºå›¾ 
  {cin>>a>>b>>c;
   add(a-'A',b-'A',c);
   add(b-'A',a-'A',c);}       
    
- while(!convergence)         //µü´úÅĞ¶Ï 
+ while(!convergence)         //è¿­ä»£åˆ¤æ–­ 
   {
    convergence=1;
    
-   memset(nw,0,sizeof(nw));  //³õÊ¼»¯ĞÂ±íµ¥ 
+   memset(nw,0,sizeof(nw));  //åˆå§‹åŒ–æ–°è¡¨å• 
    
-   for(int i=0;i<n;i++)      //DVËã·¨ 
+   for(int i=0;i<n;i++)      //DVç®—æ³• 
     for(int j=0,ja=next[i][j];j<las[i]-1;j++,ja=next[i][j])
      for(int k=0;k<n;k++)
       if(cl[i][ja]+dis[ja][k]<dis[i][k]||jump[i][k]==ja)
 	   {if(!nw[i][k]||cl[i][ja]+dis[ja][k]<nw[i][k]||jump[i][k]==ja)
-	    {nw[i][k]=cl[i][ja]+dis[ja][k];//Éú³ÉĞÂ±íµ¥
+	    {nw[i][k]=cl[i][ja]+dis[ja][k];//ç”Ÿæˆæ–°è¡¨å•
 	    jump[i][k]=ja;
 		} 
 	    if(cl[i][ja]+dis[ja][k]!=dis[k][i])
@@ -84,7 +84,7 @@ int main()
 	 }
 	}
 	 
-	 system("pause");        //Ã¿´Îµü´úÔİÍ£
+	 system("pause");        //æ¯æ¬¡è¿­ä»£æš‚åœ
 	  
   }
  fclose(stdin);
